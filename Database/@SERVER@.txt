@@ -1,0 +1,192 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.3
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 11, 2013 at 03:28 PM
+-- Server version: 5.5.29-0ubuntu0.12.04.2
+-- PHP Version: 5.3.10-1ubuntu3.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `student_449`
+--
+CREATE DATABASE `student_449` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `student_449`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank_details`
+--
+
+CREATE TABLE IF NOT EXISTS `bank_details` (
+  `Bank_Account_Number` varchar(30) DEFAULT NULL,
+  `Bank_Name` varchar(50) NOT NULL,
+  `Account_Holders_Name` varchar(50) NOT NULL,
+  KEY `Bank_Account_Number` (`Bank_Account_Number`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `bank_details`
+--
+
+INSERT INTO `bank_details` (`Bank_Account_Number`, `Bank_Name`, `Account_Holders_Name`) VALUES
+('1', '12', 'sdfdsg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE IF NOT EXISTS `courses` (
+  `CourseID` int(11) NOT NULL AUTO_INCREMENT,
+  `Course_Name` varchar(50) NOT NULL,
+  `Number of Units` int(11) NOT NULL,
+  `Start_Date` datetime NOT NULL,
+  `End_Date` datetime NOT NULL,
+  `Type_of_Course` varchar(10) NOT NULL,
+  `UnitID_1` varchar(10) DEFAULT NULL,
+  `UnitID_2` varchar(10) DEFAULT NULL,
+  `UnitID_3` varchar(10) DEFAULT NULL,
+  `UnitID_4` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`CourseID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`CourseID`, `Course_Name`, `Number of Units`, `Start_Date`, `End_Date`, `Type_of_Course`, `UnitID_1`, `UnitID_2`, `UnitID_3`, `UnitID_4`) VALUES
+(1, 'Computer Security and forensic', 4, '2012-10-20 00:00:00', '2015-12-20 00:00:00', 'FT', '1', NULL, NULL, NULL),
+(2, 'Sport Therapy', 4, '2012-10-20 00:00:00', '2015-12-20 00:00:00', 'PT', 'CIS12121', 'CIS16', 'CIS89', 'CIS-012');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `results_table`
+--
+
+CREATE TABLE IF NOT EXISTS `results_table` (
+  `StudentID` int(11) NOT NULL,
+  `CourseID` int(11) NOT NULL,
+  `UnitID` varchar(255) NOT NULL,
+  `Grade` varchar(5) NOT NULL,
+  PRIMARY KEY (`StudentID`),
+  KEY `CourseID` (`CourseID`),
+  KEY `UnitID` (`UnitID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `results_table`
+--
+
+INSERT INTO `results_table` (`StudentID`, `CourseID`, `UnitID`, `Grade`) VALUES
+(1219460, 1, '1', 'A+');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE IF NOT EXISTS `staff` (
+  `StaffID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(10) DEFAULT NULL,
+  `First_Name` varchar(40) NOT NULL,
+  `Surname` varchar(40) DEFAULT NULL,
+  `Date_of_Birth` date NOT NULL,
+  `Gender` varchar(20) NOT NULL,
+  `Address` varchar(50) DEFAULT NULL,
+  `Postcode` varchar(25) DEFAULT NULL,
+  `Telephone_Number` varchar(25) NOT NULL,
+  `E_mail` varchar(50) DEFAULT NULL,
+  `Bank_Account_Number` varchar(25) NOT NULL,
+  `Status` varchar(20) NOT NULL,
+  `UnitID` varchar(15) DEFAULT NULL,
+  `Password` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`StaffID`),
+  UNIQUE KEY `StaffID` (`StaffID`),
+  KEY `Postcode` (`Postcode`),
+  KEY `UnitID` (`UnitID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1234567893 ;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`StaffID`, `Title`, `First_Name`, `Surname`, `Date_of_Birth`, `Gender`, `Address`, `Postcode`, `Telephone_Number`, `E_mail`, `Bank_Account_Number`, `Status`, `UnitID`, `Password`) VALUES
+(1234567890, 'MR all', 'Alexander', 'ASAS', '1211-12-12', 'Female', 'LDASNSJSJDNJNdnjew', 'LW3-3XY', '+233232', 'defswfsfsfgs@o2.pl', '0', 'Admin', '1', 'haha'),
+(101010, 'value2', 'Paul', 'sdds', '0000-00-00', 'male', 'edsfsd', 'sd', 'sdsfds', 'sdfdsaf', '2232', 'Staff', '2', 'password'),
+(1219462, 'MR', 'Alex', 'Drabek', '1990-09-17', 'Male', 'Luton', 'LU2 2AA', '1', '91991919', '0', 'Staff', '0', '1'),
+(1234567891, 'Mr', 'xx', 'xx c', '1990-11-12', 'Maleluton', 'LA1 2EE', '+12 121212', 'sdsd@o2.pl', '1212', 'Staff', 'CIS018-1', 'test', 'barcl.'),
+(1234567892, 'Mr', 'xx', 'xx c', '1990-12-18', 'Maleluton', 'LU3 3AB', '+12 121212', 'sdsd@o2.pl', '1212', 'Staff', 'CIS018-1', 'test', 'barcl.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE IF NOT EXISTS `students` (
+  `StudentID` int(11) NOT NULL AUTO_INCREMENT,
+  `First_Name` varchar(40) NOT NULL,
+  `Surname` varchar(40) NOT NULL,
+  `Date_of_Birth` date NOT NULL,
+  `Gender` varchar(20) NOT NULL,
+  `Address` varchar(50) DEFAULT NULL,
+  `Postcode` varchar(25) DEFAULT NULL,
+  `CourseID` int(11) NOT NULL,
+  `Telephone_Number` varchar(25) DEFAULT NULL,
+  `E_mail` varchar(50) NOT NULL,
+  `Bank_Account_Number` varchar(25) NOT NULL,
+  `Year_of_Study` varchar(25) NOT NULL,
+  `Password` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`StudentID`),
+  UNIQUE KEY `StudentID` (`StudentID`),
+  KEY `CourseID` (`CourseID`),
+  KEY `Postcode` (`Postcode`),
+  KEY `Bank_Account_Number` (`Bank_Account_Number`),
+  KEY `StudentID_2` (`StudentID`),
+  KEY `StudentID_3` (`StudentID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1219469 ;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`StudentID`, `First_Name`, `Surname`, `Date_of_Birth`, `Gender`, `Address`, `Postcode`, `CourseID`, `Telephone_Number`, `E_mail`, `Bank_Account_Number`, `Year_of_Study`, `Password`) VALUES
+(1219460, 'Alexander', 'Drabek', '1991-02-16', 'Male', 'Luto nsdfnmdfndsf', 'LU1-1EE', 1, '+42 576454412', 'emails@study.beds.ac.uk', '121212', '1', 'test1'),
+(1219461, 'Alex', 'Drabek', '0000-00-00', 'Male', 'Luton', 'LU3 1EE', 1, '91991919', 'asdas@o2.pl', '1234567', '1', 'test'),
+(1219462, 'Alex', 'Drabek', '1992-12-15', 'Male', 'Luton', 'LU1 1EE', 1, '91991919', 'asdas@o2.pl', '1234567', '1', 'test'),
+(1219463, 'Alex', 'Drabek', '1993-10-11', 'Male', 'Luton', 'LU3 1EE', 1, '91991919', 'asdas@o2.pl', '1234567', '1', 'test'),
+(1219464, 'Karolina', 'Drabek', '1994-11-05', 'Male', 'Luton', 'LU2 2WE', 1, '91991919', 'asdas@o2.pl', '1234567', '1', 'test'),
+(1219465, 'sdaas', 'asdasd', '1992-12-12', '2', 'sdasdas', 'lu1 dsf', 1212, 'asdas@o12.pl', '121213', 'qwerty', '', 'sdfsdfs'),
+(1219466, 'asdas', 'asdfa', '1991-12-15', 'Female', 'sdfsd', 'sefds', 1, '+21212', 'gfhgfhfg', '233232', 'Year 1', 'testowewe'),
+(1219467, 'bababa', 'asdf', '1990-06-21', 'Female', 'w3esdfd', 'asdfsa', 1, '+1212', 'esdfsdf@dsf', '1212', 'Year 2', 'wewew'),
+(1219468, 'alowsx', 'drobciowe', '1992-12-12', 'Female', 'sdfasedf', 'lo 09 1', 2, '1212+', 'gwed@o2.', 'wes', '23245678', 'Masters');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE IF NOT EXISTS `units` (
+  `Unit_ID` varchar(11) NOT NULL DEFAULT '0',
+  `UnitName` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Unit_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`Unit_ID`, `UnitName`) VALUES
+('CIS018-1', 'sdd'),
+('CIS01919191', 'sdd'),
+('CIS16-1', 'sport'),
+('CIS20-1', 'security');
